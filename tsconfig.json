@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
     "strict": true,
-    "module": "commonjs",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "lib": ["ES2022"],
     "esModuleInterop": true,
-    "target": "es5",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    //"incremental": true,
-    "rootDir": "src/",
-    "outDir": "lib",
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "dist",
     "declaration": true,
-    "lib": ["es6"]
+    "declarationMap": true,
+    "sourceMap": true
   },
-  "include": ["src/*"],
-  "exclude": ["__tests__", "demos"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "__tests__", "demos"]
 }

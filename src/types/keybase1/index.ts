@@ -133,7 +133,7 @@
  * - ../client/protocol/avdl/keybase1/wot.avdl
  */
 
-import * as gregor1 from '../gregor1'
+import * as gregor1 from '../gregor1/index.js'
 
 export type HasServerKeysRes = {
   hasServerKeys: boolean

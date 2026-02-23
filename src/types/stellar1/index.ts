@@ -12,7 +12,7 @@
  * - ../client/protocol/avdl/stellar1/ui.avdl
  */
 
-import * as keybase1 from '../keybase1'
+import * as keybase1 from '../keybase1/index.js'
 
 export type BundleRevision = number
 

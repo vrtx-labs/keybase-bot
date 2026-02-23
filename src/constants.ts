@@ -3,6 +3,6 @@ export const API_VERSIONS = {
   kvstore: 1,
   team: 1,
   wallet: 1,
-}
+} as const;
 
-export type API_TYPES = 'chat' | 'kvstore' | 'team' | 'wallet'
+export type API_TYPES = "chat" | "kvstore" | "team" | "wallet";

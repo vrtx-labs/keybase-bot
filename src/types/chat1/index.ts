@@ -16,9 +16,9 @@
  * - ../client/protocol/avdl/chat1/unfurl.avdl
  */
 
-import * as gregor1 from '../gregor1'
-import * as keybase1 from '../keybase1'
-import * as stellar1 from '../stellar1'
+import * as gregor1 from '../gregor1/index.js'
+import * as keybase1 from '../keybase1/index.js'
+import * as stellar1 from '../stellar1/index.js'
 
 export type ConvIDStr = string
 

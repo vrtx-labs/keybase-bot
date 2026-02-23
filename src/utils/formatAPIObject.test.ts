@@ -1,90 +1,92 @@
-/* eslint-disable @typescript-eslint/camelcase */
-import {formatAPIObjectInput, formatAPIObjectOutput} from './formatAPIObject'
+import { describe, it, expect } from "vitest";
+import { formatAPIObjectInput, formatAPIObjectOutput } from "./formatAPIObject.js";
 
-describe('formatAPIObjectInput', () => {
-  it('works', () => {
+describe("formatAPIObjectInput", () => {
+  it("works", () => {
     const input = {
-      conversationId: 'blah',
+      conversationId: "blah",
       nonblock: false,
       members: {
-        memberType: 'user',
+        memberType: "user",
         memberIds: [1, 2, 3, 4, 5],
       },
-    }
-    let formattedInput = formatAPIObjectInput(input, 'chat')
+    };
+    let formattedInput = formatAPIObjectInput(input, "chat");
     expect(formattedInput).toEqual({
-      conversation_id: 'blah',
+      conversation_id: "blah",
       nonblock: false,
       members: {
-        member_type: 'user',
+        member_type: "user",
         member_ids: [1, 2, 3, 4, 5],
       },
-    })
-    formattedInput = formatAPIObjectInput(input, 'wallet')
+    });
+    formattedInput = formatAPIObjectInput(input, "wallet");
     expect(formattedInput).toEqual({
-      'conversation-id': 'blah',
+      "conversation-id": "blah",
       nonblock: false,
       members: {
-        'member-type': 'user',
-        'member-ids': [1, 2, 3, 4, 5],
+        "member-type": "user",
+        "member-ids": [1, 2, 3, 4, 5],
       },
-    })
-  })
-})
+    });
+  });
+});
 
-describe('formatAPIObjectOutput', () => {
-  it('works', () => {
+describe("formatAPIObjectOutput", () => {
+  it("works", () => {
     const output = {
-      conversation_id: 'blah',
+      conversation_id: "blah",
       nonblock: false,
       members: {
-        member_type: 'user',
+        member_type: "user",
         member_ids: [1, 2, 3, 4, 5],
       },
-    }
-    const formattedOutput = formatAPIObjectOutput(output, null)
+    };
+    const formattedOutput = formatAPIObjectOutput(output, null);
     expect(formattedOutput).toEqual({
-      conversationId: 'blah',
+      conversationId: "blah",
       nonblock: false,
       members: {
-        memberType: 'user',
+        memberType: "user",
         memberIds: [1, 2, 3, 4, 5],
       },
-    })
-  })
+    });
+  });
 
-  it('works with a blacklisted field', () => {
+  it("works with a blacklisted field", () => {
     const output = {
       messages: [
         {
           msg: {
-            message_id: 'blah',
+            message_id: "blah",
             reactions: {
               reactions: {
-                ':poop:': {the_bob: {some_field: 'cool!'}},
+                ":poop:": { the_bob: { some_field: "cool!" } },
               },
             },
           },
         },
       ],
-    }
+    };
     const formattedOutput = formatAPIObjectOutput(output, {
-      apiName: 'chat',
-      method: 'read',
-    })
+      apiName: "chat",
+      method: "read",
+    });
+    // reactions.reactions keys are blacklisted from camelCase conversion,
+    // but values nested inside those keys are still converted.
     expect(formattedOutput).toEqual({
       messages: [
         {
           msg: {
-            messageId: 'blah',
+            messageId: "blah",
             reactions: {
               reactions: {
-                poop: {the_bob: {someField: 'cool!'}},
+                ":poop:": { the_bob: { someField: "cool!" } },
               },
             },
           },
         },
       ],
-    })
-  })
-})
+    });
+  });
+});

@@ -1,5 +1,5 @@
-import {platform} from 'os'
+import { platform } from "os";
 
-const binaryName = platform() === 'win32' ? 'keybase.exe' : 'keybase'
+const binaryName = platform() === "win32" ? "keybase.exe" : "keybase";
 
-export default binaryName
+export default binaryName;
