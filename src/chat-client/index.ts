@@ -42,6 +42,12 @@ export interface ChatAttachOptions {
   title?: string;
   preview?: string;
   explodingLifetime?: number;
+  /** Send as an audio message with waveform and duration metadata. */
+  isAudio?: boolean;
+  /** Audio duration in milliseconds. Auto-detected from MP4/M4A files if omitted. */
+  audioDurationMs?: number;
+  /** Waveform amplitude data (0.0-1.0). Auto-generated if omitted. */
+  audioAmps?: number[];
 }
 
 export interface ChatDownloadOptions {
