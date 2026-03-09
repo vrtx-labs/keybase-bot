@@ -2,10 +2,12 @@ name: Publish to npm
 
 on:
   push:
-    branches:
-      - main
     tags:
       - '*'
+
+permissions:
+  id-token: write  # Required for OIDC trusted publishing
+  contents: read
 
 jobs:
   publish:
@@ -32,5 +34,4 @@ jobs:
       
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # No NPM_TOKEN needed - uses OIDC trusted publishing
